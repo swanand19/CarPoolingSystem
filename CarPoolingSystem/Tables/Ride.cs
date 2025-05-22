@@ -14,8 +14,12 @@ namespace CarPoolingSystem.Tables
         public string EndLocation { get; set; }
         public DateTime DepartureTime { get; set; }
         public int TotalSeats { get; set; }
-        public int NumberOfSeatsBooked { get; set; }
         public decimal FarePerSeat { get; set; }
+        public int NumberOfSeatsBooked { get; set; }
         public DateTime? CreatedAt { get; set; }
+
+        public User Driver { get; set; }
+        public Vehicle Vehicle { get; set; }
+        public List<RideRoute> RideRoutes { get; set; }
     }
 }
