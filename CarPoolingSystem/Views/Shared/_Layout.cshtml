@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/chosen.min.css"/>
 </head>
 <body>
 
@@ -22,7 +23,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" asp-controller="Rides" asp-action="Create">Going somehwere? Create Ride</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -42,19 +43,25 @@
             </div>
         </div>
     </nav>
-
-
-
-    @* <div>
-        <ul>
-            <li>
-                <a asp-controller="Rides" asp-action="Index">Rides Page</a>
-            </li>
-            <li><a asp-controller="Dashboard" asp-action="Index">Book a ride</a></li>
-        </ul>
-    </div> *@
     <div>
         @RenderBody()
     </div>
+    <!--Bootswatch scripts-->
+    <script src="~/js/jquery-3.6.0.min.js"></script>
+    <script src="~/js/chosen.jquery.min.js"></script>
+
+    <!--client side validation scripts-->
+    <script src="~/js/clientValidation_jquery-3.6.0.min.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".chosen-select").chosen({
+                width: "100%",
+                no_results_text: "No results matched"
+            });
+        });
+    </script>
 </body>
 </html>

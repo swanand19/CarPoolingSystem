@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarPoolingSystem.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarPoolingSystem.Controllers
 {
@@ -9,8 +10,24 @@ namespace CarPoolingSystem.Controllers
         [Route("[action]")]
         public IActionResult Index()
         {
+            
             return View();
         }
+
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        public IActionResult Create(RideVM model)
+        {
+            return RedirectToAction("Index", "Dashboard");
+        }
+
 
     }
 }
