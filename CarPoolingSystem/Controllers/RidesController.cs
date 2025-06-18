@@ -1,4 +1,6 @@
-﻿using CarPoolingSystem.ViewModels;
+﻿using CarPoolingSystem.DbEntities;
+using CarPoolingSystem.Tables;
+using CarPoolingSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarPoolingSystem.Controllers
@@ -6,6 +8,11 @@ namespace CarPoolingSystem.Controllers
     [Route("[controller]")]
     public class RidesController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        public RidesController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         [Route("[action]")]
         public IActionResult Index()
@@ -23,6 +30,7 @@ namespace CarPoolingSystem.Controllers
 
         [HttpPost]
         [Route("[action]")]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(RideVM model)
         {
             return RedirectToAction("Index", "Dashboard");
