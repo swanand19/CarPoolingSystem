@@ -1,9 +1,10 @@
 ﻿using CarPoolingSystem.Tables;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarPoolingSystem.DbEntities
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User, Role, long>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :base(options) { }
 

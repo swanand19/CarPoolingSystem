@@ -37,10 +37,25 @@
                     </li>
                 </ul>
 
-                <ul class="d-flex navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-action="Register" asp-controller="Users">Register here</a>
-                    </li>
+                <ul class="d-flex navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">@User.Identity?.Name</a>
+                            <div class="dropdown-menu" data-bs-popper="static">
+                                <a class="dropdown-item" href="#">Logout</a>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Register" asp-controller="Users">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Login" asp-controller="Users">Login</a>
+                        </li>
+                    }
                 </ul>
                 @* <form class="d-flex">
                     <input class="form-control me-sm-2" type="search" placeholder="Search">
@@ -54,6 +69,8 @@
     </div>
     <!--Bootswatch scripts-->
     <script src="~/js/jquery-3.6.0.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+
     <script src="~/js/chosen.jquery.min.js"></script>
 
     <!--client side validation scripts-->
