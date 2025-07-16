@@ -36,7 +36,8 @@ namespace CarPoolingSystem.Controllers
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
                     IsDriver = model.IsDriver,
-                    UserName = model.UserName
+                    UserName = model.UserName,
+                    CreatedAt = DateTime.Now
                 };
 
                 IdentityResult result =  await _userManager.CreateAsync(user, model.Password);

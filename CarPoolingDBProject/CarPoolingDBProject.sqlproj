@@ -61,10 +61,16 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Vehicles.sql" />
-    <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\UserDocuments.sql" />
     <Build Include="dbo\Tables\Rides.sql" />
     <Build Include="dbo\Tables\RideRoutes.sql" />
     <Build Include="dbo\Tables\RideBookings.sql" />
+    <Build Include="dbo\Tables\AspNetUserTokens.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
+    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
+    <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\AspNetRoleClaims.sql" />
   </ItemGroup>
 </Project>

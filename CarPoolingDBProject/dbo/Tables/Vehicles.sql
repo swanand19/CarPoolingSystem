@@ -7,7 +7,7 @@
     [UserId]         BIGINT        NULL,
     [Model]          NVARCHAR (50) NULL,
     PRIMARY KEY CLUSTERED ([VehicleId] ASC),
-    FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([UserId]),
+    FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]),
     UNIQUE NONCLUSTERED ([VehicleNumber] ASC)
 );
 

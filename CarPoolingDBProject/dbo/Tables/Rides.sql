@@ -10,7 +10,7 @@
     [CreatedAt]           DATETIME        DEFAULT (getdate()) NULL,
     [NumberOfSeatsBooked] INT             NULL,
     PRIMARY KEY CLUSTERED ([RideId] ASC),
-    FOREIGN KEY ([DriverId]) REFERENCES [dbo].[Users] ([UserId]),
+    FOREIGN KEY ([DriverId]) REFERENCES [dbo].[AspNetUsers] ([Id]),
     FOREIGN KEY ([VehicleId]) REFERENCES [dbo].[Vehicles] ([VehicleId])
 );
 

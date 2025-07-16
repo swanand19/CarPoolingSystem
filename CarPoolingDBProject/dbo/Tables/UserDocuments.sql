@@ -7,6 +7,6 @@
     [IsVerified]     BIT            DEFAULT ((0)) NULL,
     [UploadedAt]     DATETIME       DEFAULT (getdate()) NULL,
     PRIMARY KEY CLUSTERED ([UserDocumentId] ASC),
-    FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([UserId])
+    FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id])
 );
 
