@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CarPoolingSystem.ViewModels
 {
-    public class UserVM
+    public class RegisterUserVM
     {
-        public long? UserId { get; set; }
-
         [Required(ErrorMessage = "Please enter full name.")]
         [DisplayName("Full Name")]
         public string? FullName { get; set; }
@@ -30,6 +28,7 @@ namespace CarPoolingSystem.ViewModels
         [Required(ErrorMessage = "Please enter password.")]
         [DataType(DataType.Password)]
         [DisplayName("Password")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z@_\d]{5,}$", ErrorMessage = "Password must have 5+ characters with uppercase, lowercase, digit, and only @ _ special characters allowed")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Please confirm your password.")]

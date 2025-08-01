@@ -1,12 +1,15 @@
 ﻿using CarPoolingSystem.Tables;
 using CarPoolingSystem.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CarPoolingSystem.Controllers
 {
     [Route("[controller]/[action]")]
+    [AllowAnonymous]
     public class UsersController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -26,7 +29,7 @@ namespace CarPoolingSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(UserVM model)
+        public async Task<ActionResult> Register(RegisterUserVM model)
         {
             if (ModelState.IsValid)
             {
@@ -40,7 +43,7 @@ namespace CarPoolingSystem.Controllers
                     CreatedAt = DateTime.Now
                 };
 
-                IdentityResult result =  await _userManager.CreateAsync(user, model.Password);
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     //now user should be signed in
@@ -50,7 +53,7 @@ namespace CarPoolingSystem.Controllers
                 }
                 else
                 {
-                    foreach(IdentityError error in result.Errors)
+                    foreach (IdentityError error in result.Errors)
                     {
                         ModelState.AddModelError("Register", error.Description);
                     }
@@ -64,10 +67,43 @@ namespace CarPoolingSystem.Controllers
             }
         }
 
-        [Route("[action]")]
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginUserVM model, string ReturnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ErrorMessage = ModelState.Values.SelectMany(temp => temp.Errors).Select(temp => temp.ErrorMessage);
+                return View(model);
+            }
+            else
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.Remember, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    if(!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
+                    {
+                        return LocalRedirect(ReturnUrl);
+                    }
+                    return RedirectToAction("Index", "Dashboard");
+                }
+                else
+                {
+                    ModelState.AddModelError("Login", "Invalid email or password.");
+                    return View(model);
+                }
+            }
+        }
+
+        public async Task<ActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }

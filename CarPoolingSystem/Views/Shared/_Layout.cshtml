@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/css/chosen.min.css"/>
+    <link rel="stylesheet" href="~/css/chosen.min.css" />
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" asp-controller="Dashboard" asp-action="Index">Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> *@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Rides" asp-action="Index">
+                        <a class="nav-link" asp-controller="Rides" asp-action="Index" aria-current="page">
                             Book Ride
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Rides" asp-action="Create">Going somehwere? Create Ride</a>
+                        <a class="nav-link" asp-controller="Rides" asp-action="Create" aria-current="page">Going somehwere? Create Ride</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -38,29 +38,25 @@
                 </ul>
 
                 <ul class="d-flex navbar-nav">
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User?.Identity?.IsAuthenticated == true)
                     {
                         <li class="nav-item dropdown">
                             <a class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">@User.Identity?.Name</a>
                             <div class="dropdown-menu dropdown-menu-end" data-bs-popper="static">
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" asp-action="Logout" asp-controller="Users">Logout</a>
                             </div>
                         </li>
                     }
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-action="Register" asp-controller="Users">Register</a>
+                            <a class="nav-link" asp-action="Register" asp-controller="Users" aria-current="page">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-action="Login" asp-controller="Users">Login</a>
+                            <a class="nav-link" asp-action="Login" asp-controller="Users" asp-route-ReturnUrl="@Context.Request.Query["ReturnUrl"]" aria-current="page">Login</a>
                         </li>
                     }
                 </ul>
-                @* <form class="d-flex">
-                    <input class="form-control me-sm-2" type="search" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form> *@
             </div>
         </div>
     </nav>
@@ -85,6 +81,13 @@
                 no_results_text: "No results matched"
             });
         });
+
+        // Get current page from URL
+        const currentPage = window.location.pathname;
+        // Remove active from all nav links
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        // Add active to current page link
+        document.querySelector(`a[href="${currentPage}"]`).classList.add('active');
     </script>
 </body>
 </html>

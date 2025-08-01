@@ -1,4 +1,4 @@
-﻿@model CarPoolingSystem.ViewModels.UserVM
+﻿@model CarPoolingSystem.ViewModels.RegisterUserVM
 @{
     ViewBag.Title = "Register";
 }
@@ -7,7 +7,7 @@
     <div class="row mt-4">
         <div class="col-sm-4"></div>
         <div class="col-sm-4 text-sm-center">
-            Already Registered? <a asp-action="Login" asp-controller="User">Login</a>
+            Already Registered? <a asp-action="Login" asp-controller="Users">Login</a>
         </div>
         <div class="col-sm-4"></div>
 
@@ -19,7 +19,6 @@
         @using (Html.BeginForm("Register", "Users", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.UserId)
 
             <div class="row mt-2">
                 <div class="col-sm-1"></div>
@@ -89,6 +88,19 @@
                 <div class="align-self-sm-center">
                     <button type="submit" class="btn btn-success">Create</button>
                 </div>
+            </div>
+            <div class="row mt-2 text-sm-center">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="text-danger">
+                        <ul class="list-unstyled">
+                            @foreach (var error in ViewData.ModelState["Register"].Errors)
+                            {
+                                <li>• @error.ErrorMessage</li>
+                            }
+                        </ul>
+                    </div>
+                }
             </div>
         }
     </fieldset>
