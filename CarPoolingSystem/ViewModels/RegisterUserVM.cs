@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarPoolingSystem.ViewModels
 {
@@ -12,6 +13,7 @@ namespace CarPoolingSystem.ViewModels
         [Required(ErrorMessage = "Please enter email.")]
         [EmailAddress(ErrorMessage = "Please enter email address in valid format.")]
         [DisplayName("Email")]
+        [Remote(action: "IsEmailAlreadyUsed", controller:"Users", ErrorMessage = "Email already registered.")]
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "Please enter phone number.")]
@@ -39,5 +41,9 @@ namespace CarPoolingSystem.ViewModels
 
         [DisplayName("Is Driver")]
         public bool IsDriver { get; set; } = false;
+
+        [DisplayName("User Type")]
+        [Required]
+        public string UserType { get; set; } = Enums.UserTypeOptions.User.ToString();
     }
 }

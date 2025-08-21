@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarPoolingSystem.ViewModels
 {
     public class LoginUserVM
     {
-        [Required(ErrorMessage = "Please enter email.")]
-        [EmailAddress(ErrorMessage = "Please enter email address in valid format.")]
-        [DisplayName("Email")]
-        public string Email { get; set; }
+        [Required(ErrorMessage = "Please enter username.")]
+        [DisplayName("Username")]
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Please enter password.")]
         [DataType(DataType.Password)]

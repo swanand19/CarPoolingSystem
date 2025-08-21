@@ -25,6 +25,9 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Rides" asp-action="Create" aria-current="page">Going somehwere? Create Ride</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Roles" asp-action="Index" aria-current="page">Roles</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                         <div class="dropdown-menu">
@@ -53,7 +56,7 @@
                             <a class="nav-link" asp-action="Register" asp-controller="Users" aria-current="page">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-action="Login" asp-controller="Users" asp-route-ReturnUrl="@Context.Request.Query["ReturnUrl"]" aria-current="page">Login</a>
+                            <a class="nav-link" asp-action="Login" asp-controller="Users" aria-current="page">Login</a>
                         </li>
                     }
                 </ul>
